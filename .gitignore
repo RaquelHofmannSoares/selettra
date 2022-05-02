@@ -1,0 +1,11 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# local env files
+.env
+
+# database
+ormconfig.json
