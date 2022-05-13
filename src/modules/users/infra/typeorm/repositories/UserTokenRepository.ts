@@ -1,6 +1,5 @@
 import { ICreateUserTokenDTO } from "modules/users/dtos/ICreateUserTokenDTO";
 import { getRepository, Repository } from "typeorm";
-import { string } from "yup";
 
 import { UserToken } from "../entities/UserToken";
 
