@@ -6,7 +6,7 @@ const auth = {
     secretToken: process.env.APP_SECRET || "defaultSecretToken",
     secretRefreshToken:
         process.env.APP_REFRESH_SECRET || "defaultSecretRefreshToken",
-    expiresInToken: "2h",
+    expiresInToken: "5h",
     expiresInRefreshToken: "1d",
     expiresInRefreshTokenInDays: 1,
 };
