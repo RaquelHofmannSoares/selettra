@@ -1,14 +1,21 @@
 import { BaseEntity } from "shared/infra/typeorm/entities/BaseEntity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+} from "typeorm";
 
 import { User } from "./User";
 
-@Entity({ name: "Users" })
+@Entity({ name: "UserToken" })
 class UserToken extends BaseEntity {
     constructor() {
         super();
     }
-    @PrimaryColumn()
+
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column()

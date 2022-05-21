@@ -5,6 +5,8 @@ import { CreateUserService } from "./CreateUserService";
 class CreateUserController {
     async handle(request: Request, response: Response): Promise<Response> {
         const { username, password, name, status } = request.body;
+        const { username: subject } = request.user;
+
         const createUserService = new CreateUserService();
 
         const user = await createUserService.execute({
@@ -12,8 +14,8 @@ class CreateUserController {
             password,
             name,
             status,
-            createdBy: "Admin",
-            updatedBy: "Admin",
+            createdBy: subject,
+            updatedBy: subject,
         });
 
         delete user.password;

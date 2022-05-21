@@ -8,7 +8,7 @@ export class CreateTableUserToken1652406659693 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "numeric",
+                        type: "serial",
                         isPrimary: true,
                     },
                     {

@@ -13,6 +13,8 @@ function errorHandle(
             .status(error.statusCode)
             .json(error.getResponseMessage());
     }
+    console.error(error);
+
     return response.status(500).json({
         status: "Error",
         message: "Internal Server Error",

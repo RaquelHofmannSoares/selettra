@@ -80,7 +80,6 @@ class AuthenticateUserService {
             updatedBy: username,
         });
 
-        console.log({ message: "ok" });
         return {
             token,
             refreshToken,

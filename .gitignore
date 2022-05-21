@@ -9,3 +9,4 @@
 
 # database
 ormconfig.json
+ormlogs.log
