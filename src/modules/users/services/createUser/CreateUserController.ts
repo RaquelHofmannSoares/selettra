@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import { UserStatus } from "modules/users/enums/UserStatus";
 
 import { CreateUserService } from "./CreateUserService";
 
 class CreateUserController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { username, password, name, status } = request.body;
+        const { username, password, name } = request.body;
         const { username: subject } = request.user;
 
         const createUserService = new CreateUserService();
@@ -13,7 +14,7 @@ class CreateUserController {
             username,
             password,
             name,
-            status,
+            status: UserStatus.ACTIVE,
             createdBy: subject,
             updatedBy: subject,
         });

@@ -8,7 +8,7 @@ export class CreateTableCargos1651705270908 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "numeric",
+                        type: "serial",
                         isPrimary: true,
                     },
                     {
