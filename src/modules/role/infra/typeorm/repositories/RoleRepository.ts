@@ -1,4 +1,3 @@
-import { request } from "express";
 import { ICreateRoleDTO } from "modules/role/dtos/ICreateRoleDTO";
 import { getRepository, Repository } from "typeorm";
 
@@ -30,12 +29,19 @@ class RoleRepository {
     }
 
     async list(): Promise<Role[]> {
-        const roles = this.repository.find();
+        const roles = await this.repository.find();
 
         return roles;
     }
+
     async findByName(name: string): Promise<Role> {
-        const role = this.repository.findOne({ name });
+        const role = await this.repository.findOne({ name });
+
+        return role;
+    }
+
+    async findById(id: number): Promise<Role> {
+        const role = await this.repository.findOne({ id });
 
         return role;
     }

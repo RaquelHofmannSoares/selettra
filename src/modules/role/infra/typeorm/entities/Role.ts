@@ -1,5 +1,6 @@
+import { Employee } from "modules/employee/infra/typeorm/entities/Employee";
 import { BaseEntity } from "shared/infra/typeorm/entities/BaseEntity";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "Cargos" })
 class Role extends BaseEntity {
@@ -11,6 +12,9 @@ class Role extends BaseEntity {
 
     @Column()
     status: number;
+
+    @OneToMany(() => Employee, (employee) => employee.cargo)
+    empoloyees: Employee[];
 }
 
 export { Role };

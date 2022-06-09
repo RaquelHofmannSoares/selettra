@@ -1,4 +1,3 @@
-import { request } from "express";
 import { ICreateDepartmentDTO } from "modules/department/dtos/ICreateDepartmentDTO";
 import { getRepository, Repository } from "typeorm";
 
@@ -17,27 +16,34 @@ class DepartmentRepository {
         createdBy,
         updatedBy,
     }: ICreateDepartmentDTO): Promise<Department> {
-        const Department = this.repository.create({
+        const department = this.repository.create({
             name,
             status,
             createdBy,
             updatedBy,
         });
 
-        await this.repository.save(Department);
+        await this.repository.save(department);
 
-        return Department;
+        return department;
     }
 
     async list(): Promise<Department[]> {
-        const Departments = this.repository.find();
+        const departments = this.repository.find();
 
-        return Departments;
+        return departments;
     }
-    async findByName(name: string): Promise<Department> {
-        const Department = this.repository.findOne({ name });
 
-        return Department;
+    async findByName(name: string): Promise<Department> {
+        const department = this.repository.findOne({ name });
+
+        return department;
+    }
+
+    async findById(id: number): Promise<Department> {
+        const department = this.repository.findOne({ id });
+
+        return department;
     }
 }
 export { DepartmentRepository };

@@ -1,37 +1,54 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import {
+    MigrationInterface,
+    QueryRunner,
+    Table,
+    TableForeignKey,
+} from "typeorm";
 
-export class CreateTableFormacao1651705975087 implements MigrationInterface {
+export class CreateTableColaborador1654306200585 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "Formacao",
+                name: "Colaborador",
                 columns: [
                     {
-                        name: "id",
-                        type: "numeric",
+                        name: "matricula",
+                        type: "varchar",
+                        length: "4000",
                         isPrimary: true,
                     },
                     {
-                        name: "colaboradorId",
-                        type: "numeric",
-                        isNullable: false,
-                    },
-                    {
-                        name: "curso",
+                        name: "name",
                         type: "varchar",
                         length: "4000",
                         isNullable: false,
                     },
                     {
-                        name: "situacao",
+                        name: "birthdate",
+                        type: "date",
+                        isNullable: false,
+                    },
+                    {
+                        name: "wage",
                         type: "numeric",
                         isNullable: false,
                     },
                     {
-                        name: "dataConclusao",
-                        type: "date",
+                        name: "cargoId",
+                        type: "integer",
                         isNullable: false,
                     },
+                    {
+                        name: "setorId",
+                        type: "integer",
+                        isNullable: false,
+                    },
+                    {
+                        name: "status",
+                        type: "numeric",
+                        isNullable: false,
+                    },
+
                     {
                         name: "createdAt",
                         type: "timestamp",
@@ -64,9 +81,29 @@ export class CreateTableFormacao1651705975087 implements MigrationInterface {
                 ],
             })
         );
+
+        await queryRunner.createForeignKey(
+            "Colaborador",
+            new TableForeignKey({
+                name: "FK_Colaborador_Cargos",
+                columnNames: ["cargoId"],
+                referencedColumnNames: ["id"],
+                referencedTableName: "Cargos",
+            })
+        );
+
+        await queryRunner.createForeignKey(
+            "Colaborador",
+            new TableForeignKey({
+                name: "FK_Colaborador_Setores",
+                columnNames: ["setorId"],
+                referencedColumnNames: ["id"],
+                referencedTableName: "Setores",
+            })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("Formacao");
+        await queryRunner.dropTable("Colaborador");
     }
 }
