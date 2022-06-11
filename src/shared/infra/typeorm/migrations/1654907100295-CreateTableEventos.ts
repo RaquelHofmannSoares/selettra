@@ -1,10 +1,15 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import {
+    MigrationInterface,
+    QueryRunner,
+    Table,
+    TableForeignKey,
+} from "typeorm";
 
-export class CreateTableSitucao1654280186832 implements MigrationInterface {
+export class CreateTableEventos1654907100295 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "Situacao",
+                name: "Eventos",
                 columns: [
                     {
                         name: "id",
@@ -12,20 +17,37 @@ export class CreateTableSitucao1654280186832 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: "Name",
+                        name: "matricula",
                         type: "varchar",
                         length: "4000",
                         isNullable: false,
                     },
                     {
-                        name: "Description",
-                        type: "varchar",
-                        length: "4000",
-                        isNullable: false,
-                    },
-                    {
-                        name: "status",
+                        name: "type",
                         type: "numeric",
+                        isNullable: false,
+                    },
+                    {
+                        name: "description",
+                        type: "varchar",
+                        length: "4000",
+                        isNullable: false,
+                    },
+                    {
+                        name: "value",
+                        type: "varchar",
+                        length: "4000",
+                        isNullable: true,
+                    },
+                    {
+                        name: "oldValue",
+                        type: "varchar",
+                        length: "4000",
+                        isNullable: true,
+                    },
+                    {
+                        name: "eventDate",
+                        type: "date",
                         isNullable: false,
                     },
                     {
@@ -60,9 +82,20 @@ export class CreateTableSitucao1654280186832 implements MigrationInterface {
                 ],
             })
         );
+
+        await queryRunner.createForeignKey(
+            "Eventos",
+            new TableForeignKey({
+                name: "FK_Eventos_Colaborador",
+                columnNames: ["matricula"],
+                referencedColumnNames: ["matricula"],
+                referencedTableName: "Colaborador",
+                onDelete: "CASCADE",
+            })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("Situacao");
+        await queryRunner.dropTable("Eventos");
     }
 }
