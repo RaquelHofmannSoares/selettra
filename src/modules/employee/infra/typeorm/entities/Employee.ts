@@ -1,7 +1,15 @@
+import { Degree } from "modules/degree/infra/typeorm/entities/Degree";
 import { Department } from "modules/department/infra/typeorm/entities/Department";
 import { Role } from "modules/role/infra/typeorm/entities/Role";
 import { BaseEntity } from "shared/infra/typeorm/entities/BaseEntity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryColumn,
+} from "typeorm";
 
 @Entity({ name: "Colaborador" })
 class Employee extends BaseEntity {
@@ -33,6 +41,9 @@ class Employee extends BaseEntity {
     @ManyToOne(() => Department)
     @JoinColumn({ name: "setorId" })
     setor: Department;
+
+    @OneToMany(() => Degree, (degree) => degree.employee)
+    empoloyees: Degree[];
 }
 
 export { Employee };

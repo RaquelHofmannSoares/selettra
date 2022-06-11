@@ -1,36 +1,37 @@
-
 import { ICreateDegreeDTO } from "modules/degree/dtos/ICreateDegreeDTO";
 import { Degree } from "modules/degree/infra/typeorm/entities/Degree";
 import { DegreeRepository } from "modules/degree/infra/typeorm/repositories/DegreeRepository";
+import { EmployeeRepository } from "modules/employee/infra/typeorm/repositories/EmployeeRepository";
 import { AppError } from "shared/errors/AppError";
 
 class CreateDegreeService {
-    private DegreeRepository: DegreeRepository;
+    private degreeRepository: DegreeRepository;
+    private employeeRepository: EmployeeRepository;
 
     constructor() {
-        this.DegreeRepository = new DegreeRepository();
+        this.degreeRepository = new DegreeRepository();
+        this.employeeRepository = new EmployeeRepository();
     }
 
     async execute({
         matricula,
         description,
         finishedAt,
-        status,
         createdBy,
         updatedBy,
     }: ICreateDegreeDTO): Promise<Degree> {
-        const alreadyExistsDegree =
-            await this.DegreeRepository.findByMatricula(matricula);
+        const employee = await this.employeeRepository.findByMatricula(
+            matricula
+        );
 
-        if (!alreadyExistsDegree) {
-            throw new AppError("Matrícula inválida", 400);
+        if (!employee) {
+            throw new AppError("Matrícula não encontrada", 404);
         }
 
-        const degree = this.DegreeRepository.create({
+        const degree = this.degreeRepository.create({
             matricula,
-             description,
+            description,
             finishedAt,
-            status,
             createdBy,
             updatedBy,
         });

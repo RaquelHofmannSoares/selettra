@@ -1,4 +1,3 @@
-
 import { ICreateDegreeDTO } from "modules/degree/dtos/ICreateDegreeDTO";
 import { getRepository, Repository } from "typeorm";
 
@@ -15,7 +14,6 @@ class DegreeRepository {
         matricula,
         description,
         finishedAt,
-        status,
         createdBy,
         updatedBy,
     }: ICreateDegreeDTO): Promise<Degree> {
@@ -23,7 +21,6 @@ class DegreeRepository {
             matricula,
             description,
             finishedAt,
-            status,
             createdBy,
             updatedBy,
         });

@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import { EmployeeStatus } from "modules/employee/enums/EmployeeStatus";
 
 import { CreateEmployeeService } from "./CreateEmployeeService";
 
 class CreateEmployeeController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { matricula, name, birthdate, wage, cargoId, setorId, status } =
+        const { matricula, name, birthdate, wage, cargoId, setorId } =
             request.body;
         const { username } = request.user;
 
@@ -17,7 +18,7 @@ class CreateEmployeeController {
             wage,
             cargoId,
             setorId,
-            status,
+            status: EmployeeStatus.ACTIVE,
             createdBy: username,
             updatedBy: username,
         });

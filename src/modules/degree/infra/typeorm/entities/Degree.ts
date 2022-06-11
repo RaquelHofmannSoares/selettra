@@ -1,6 +1,12 @@
 import { Employee } from "modules/employee/infra/typeorm/entities/Employee";
 import { BaseEntity } from "shared/infra/typeorm/entities/BaseEntity";
-import { Column, Entity, JoinColumn, ManyToOne,  PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity({ name: "Formacao" })
 class Degree extends BaseEntity {
@@ -16,19 +22,9 @@ class Degree extends BaseEntity {
     @Column()
     finishedAt: Date;
 
-    @Column()
-    status: number;
- 
-    @Column()
-    createdBy: string;
-
-    @Column()
-    updatedBy: string;
-
     @ManyToOne(() => Employee)
     @JoinColumn({ name: "matricula" })
-    employee: Employee;    
-
+    employee: Employee;
 }
 
 export { Degree };

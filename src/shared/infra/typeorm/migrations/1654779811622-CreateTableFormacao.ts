@@ -1,7 +1,11 @@
-import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
+import {
+    MigrationInterface,
+    QueryRunner,
+    Table,
+    TableForeignKey,
+} from "typeorm";
 
 export class CreateTableFormacao1654779811622 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
@@ -25,7 +29,7 @@ export class CreateTableFormacao1654779811622 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: "finishDate",
+                        name: "finishedAt",
                         type: "date",
                         isNullable: false,
                     },
@@ -62,17 +66,19 @@ export class CreateTableFormacao1654779811622 implements MigrationInterface {
             })
         );
 
-        await queryRunner.createForeignKey
-        ("Formacao", new TableForeignKey({
-            columnNames: ["matricula"],
-            referencedColumnNames: ["matricula"],
-            referencedTableName: "Colaborador",
-            onDelete: "CASCADE",
-           })
+        await queryRunner.createForeignKey(
+            "Formacao",
+            new TableForeignKey({
+                name: "FK_Formacao_Colaborador",
+                columnNames: ["matricula"],
+                referencedColumnNames: ["matricula"],
+                referencedTableName: "Colaborador",
+                onDelete: "CASCADE",
+            })
         );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable("Formacao");
- }
+    }
 }

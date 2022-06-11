@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
+
 import { ListDegreeService } from "./ListDegreeService";
-
-
 
 class ListDegreetController {
     async handle(_: Request, response: Response): Promise<Response> {
